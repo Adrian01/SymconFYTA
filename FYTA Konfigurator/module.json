@@ -1,0 +1,18 @@
+{
+    "id": "{BA08E64E-FAFF-EA4A-BA4B-09314800FA1A}",
+    "name": "FYTA Konfigurator",
+    "type": 4,
+    "vendor": "FYTA",
+    "aliases": [
+        "FYTA Konfigurator"
+    ],
+    "parentRequirements": [
+        "{DED6317A-9EAD-FCB6-8358-C31657346F3A}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{2801D2B9-67C9-9459-A24B-0C5493D54D4D}"
+    ],
+    "prefix": "FYCFG",
+    "url": ""
+}

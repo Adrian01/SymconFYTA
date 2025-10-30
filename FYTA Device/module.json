@@ -1,0 +1,18 @@
+{
+    "id": "{2D06563E-2506-1A55-90F0-DBE3C24B86D8}",
+    "name": "FYTA Device",
+    "type": 3,
+    "vendor": "FYTA",
+    "aliases": [
+        "FYTA Device"
+    ],
+    "parentRequirements": [
+        "{DED6317A-9EAD-FCB6-8358-C31657346F3A}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{2801D2B9-67C9-9459-A24B-0C5493D54D4D}"
+    ],
+    "prefix": "FYD",
+    "url": ""
+}

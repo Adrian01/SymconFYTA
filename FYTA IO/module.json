@@ -1,0 +1,18 @@
+{
+    "id": "{B7DFBFD1-BC13-2E7E-F7D3-1B00A6B315A5}",
+    "name": "FYTA IO",
+    "type": 1,
+    "vendor": "FYTA",
+    "aliases": [
+        "FYTA Cloud-IO"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [
+        "{2801D2B9-67C9-9459-A24B-0C5493D54D4D}"
+    ],
+    "implemented": [
+        "{DED6317A-9EAD-FCB6-8358-C31657346F3A}"
+    ],
+    "prefix": "FYIO",
+    "url": ""
+}
