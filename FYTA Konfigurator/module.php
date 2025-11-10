@@ -113,11 +113,14 @@ declare(strict_types=1);
                             'sensor_status'    => $sensorStatus,
                             'create' => [
                                 'moduleID' => self::FYTA_DEVICE_GUID,
-                                'configuration' => [
-                                    'PlantID'  => $plantID,
-                                    'SensorID' => $sensorID,
-                                    'Nickname' => $nickname
+                                'name'     => $nickname,
+                                'configuration' => 
+                                [
+                                    'PlantID'   => $plantID,
+                                    'SensorID'  => $sensorID,
+                                    'Nickname'  => $nickname
                                 ]
+
                             ]
                         ];
                 }
