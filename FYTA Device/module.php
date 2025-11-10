@@ -42,7 +42,7 @@ declare(strict_types=1);
             $this->RegisterPropertyBoolean('use_fertilised_at', false);
             
             // Konfigurierbar: Bilddateien erstellen
-            $this->RegisterPropertyBoolean('UseOriginImage', true);
+            $this->RegisterPropertyBoolean('UseOriginImage', false);
             $this->RegisterPropertyBoolean('UseCustomImage', false);
 
 
@@ -139,14 +139,10 @@ declare(strict_types=1);
             $plantID  = $this->ReadPropertyInteger('PlantID');
             $sensorID = $this->ReadPropertyString('SensorID');
 
-            
-            // Instanzname auf den Nicknamen des FYTA Plfanzensensors anpassen
-            $this->SetInstanceName();
 
             // Timer aktivieren
             $this->SetTimerInterval("UpdatePlantData", $this->ReadPropertyInteger("UpdateIntervall_PlantData") * 1000 * 60);
             $this->SetTimerInterval("UpdatePlantImage", $this->ReadPropertyInteger("UpdateIntervall_PlantImage") * 1000 * 60 * 60);
-           // $this->RequestPlantDetails();
 
 
                 if (IPS_GetKernelRunlevel() != KR_READY || !$this->HasActiveParent()) 
@@ -251,43 +247,43 @@ declare(strict_types=1);
 
                     // Benutzerdefinierter Name auslesen
                     $nickname = (string)($result['plant']['nickname'] ?? 0);
-                    SetValue($this->GetIDForIdent('nickname'), $nickname);
+                    $this->SetValue('nickname', $nickname);
 
                     // Wissenschatlichername auslesen
                     $scientific_name = (string)($result['plant']['scientific_name'] ?? 0);
-                    SetValue($this->GetIDForIdent('scientific_name'), $scientific_name);
+                    $this->SetValue('scientific_name', $scientific_name);
 
                     // Zustand der Pflanze
                     $plant_status = (int)($result['plant']['status'] ?? 0);
-                    SetValue($this->GetIDForIdent('plant_status'), $plant_status);
+                    $this->SetValue('plant_status', $plant_status);
 
                     // Zustand des Sensors
                     $sensor_status = (int)($result['plant']['sensor']['status'] ?? 0);
-                    SetValue($this->GetIDForIdent('sensor_status'), $sensor_status);
+                    $this->SetValue('sensor_status', $sensor_status);
 
                     // Sensor zuletzt erreicht
                     $sensor_last_reached = (string)($result['plant']['sensor']['received_data_at'] ?? 0);
-                    SetValue($this->GetIDForIdent('sensor_received_data_at'), $this->FormatFytaDate($sensor_last_reached));
+                    $this->SetValue('sensor_received_data_at', $this->FormatFytaDate($sensor_last_reached));
 
                     // Zustand des Sensors
                     $sensor_battery = (int)($result['plant']['measurements']['battery'] ?? 0);
-                    SetValue($this->GetIDForIdent('sensor_battery'), $sensor_battery);
+                    $this->SetValue('sensor_battery', $sensor_battery);
 
                     // Temperatur 
                     $current_temperature = (float)($result['plant']['measurements']['temperature']['values']['current'] ?? 0);
-                    SetValue($this->GetIDForIdent('current_temperature'), $current_temperature);
+                    $this->SetValue('current_temperature', $current_temperature);
 
                     // Lichtintensität
                     $current_light = (int)($result['plant']['measurements']['light']['values']['current'] ?? 0);
-                    SetValue($this->GetIDForIdent('current_light'), $current_light);
+                    $this->SetValue('current_light', $current_light);
 
                     // Bodenfeuchte
                     $current_moisture = (int)($result['plant']['measurements']['moisture']['values']['current'] ?? 0);
-                    SetValue($this->GetIDForIdent('current_moisture'), $current_moisture);
+                    $this->SetValue('current_moisture', $current_moisture);
 
                     // Salzgehalt
                     $current_salinity = (float)($result['plant']['measurements']['salinity']['values']['current'] ?? 0);
-                    SetValue($this->GetIDForIdent('current_salinity'), $current_salinity);
+                    $this->SetValue('current_salinity', $current_salinity);
                     
 
                     // -----------------------------------------------------------
@@ -297,49 +293,49 @@ declare(strict_types=1);
                     // PH-Wert 
                     if($this->ReadPropertyBoolean('use_current_ph') && @IPS_VariableExists($this->GetIDForIdent('current_ph')))
                         {
-                            SetValue($this->GetIDForIdent('current_ph'),(float)($result['plant']['measurements']['ph']['values']['current'] ??0));
+                            $this->SetValue('current_ph',(float)($result['plant']['measurements']['ph']['values']['current'] ??0));
                         }
 
                     // Zustand PH-Wert
                     if($this->ReadPropertyBoolean('use_ph_status') && @IPS_VariableExists($this->GetIDForIdent('ph_status')))
                         {
-                            SetValue($this->GetIDForIdent('ph_status'),(float)($result['plant']['measurements']['ph']['status'] ??0));
+                            $this->SetValue('ph_status',(float)($result['plant']['measurements']['ph']['status'] ??0));
                         }
 
                     // Zustand Temperatur
                     if($this->ReadPropertyBoolean('use_temperature_status') && @IPS_VariableExists($this->GetIDForIdent('temperature_status')))
                         {
-                            SetValue($this->GetIDForIdent('temperature_status'),(int)($result['plant']['measurements']['temperature']['status'] ??0));
+                            $this->SetValue('temperature_status',(int)($result['plant']['measurements']['temperature']['status'] ??0));
                         }
 
                     //Zustand Bodenfeuchte
                     if($this->ReadPropertyBoolean('use_moisture_status') && @IPS_VariableExists($this->GetIDForIdent('moisture_status')))
                         {
-                            SetValue($this->GetIDForIdent('moisture_status'),(int)($result['plant']['measurements']['moisture']['status'] ??0));
+                            $this->SetValue('moisture_status',(int)($result['plant']['measurements']['moisture']['status'] ??0));
                         }    
                 
                     // Zustand Lichtintensität
                     if($this->ReadPropertyBoolean('use_light_status') && @IPS_VariableExists($this->GetIDForIdent('light_status')))
                         {
-                            SetValue($this->GetIDForIdent('light_status'),(int)($result['plant']['measurements']['light']['status'] ??0));
+                            $this->SetValue('light_status',(int)($result['plant']['measurements']['light']['status'] ??0));
                         }
                     
                     // Zustand Salzgehalt
                     if($this->ReadPropertyBoolean('use_salinity_status') && @IPS_VariableExists($this->GetIDForIdent('salinity_status')))
                         {
-                            SetValue($this->GetIDForIdent('salinity_status'),(int)($result['plant']['measurements']['salinity']['status'] ??0));
+                            $this->SetValue('salinity_status',(int)($result['plant']['measurements']['salinity']['status'] ??0));
                         }
                     
                     // Letzte Düngung
                     if($this->ReadPropertyBoolean('use_last_fertilised_at') && @IPS_VariableExists($this->GetIDForIdent('last_fertilised_at')))
                         {
-                            SetValue($this->GetIDForIdent('last_fertilised_at'), $this->FormatFytaDate($result['plant']['fertilisation']['last_fertilised_at'] ?? ''));
+                            $this->SetValue('last_fertilised_at', $this->FormatFytaDate($result['plant']['fertilisation']['last_fertilised_at'] ?? ''));
                         }
                     
                     // Nächste Düngung erforderlich
                     if($this->ReadPropertyBoolean('use_fertilised_at') && @IPS_VariableExists($this->GetIDForIdent('fertilised_at')))
                         {   
-                            SetValue($this->GetIDForIdent('fertilised_at'), $this->FormatFytaDate($result['plant']['fertilisation']['fertilised_at'] ?? ''));
+                            $this->SetValue('fertilised_at', $this->FormatFytaDate($result['plant']['fertilisation']['fertilised_at'] ?? ''));
                         }
 
                     break;

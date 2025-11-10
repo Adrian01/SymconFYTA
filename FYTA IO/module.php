@@ -57,7 +57,7 @@ declare(strict_types=1);
 			$command = $buffer['Command'] ?? '';
 			$senderID = $buffer['SenderID'] ?? 0;
 
-			$this->SendDebug('FYTA Cloud IO', 'Anfrage empfangen von ' . $senderID . ' TEST ' . $command . ' (von ' . $senderID . ')', 0);
+			$this->SendDebug('FYTA Cloud IO', 'Anfrage empfangen von ' . $senderID . ' ' . $command . '', 0);
 			$result = null;
 
 			switch ($command) 
@@ -87,13 +87,6 @@ declare(strict_types=1);
 
 						$this->SendDebug('FYTA Cloud IO', "Cloud Request: GET user-plant/$plantID", 0);
 						$result = $this->CloudRequest('user-plant/' . $plantID, 'GET');
-					break;
-
-
-				// Cloud Ping 
-				case 'Ping':
-					$this->SendDebug('FYTA Cloud IO', '🔍 Cloud-Ping erhalten', 0);
-					$result = ['pong' => true, 'time' => time()];
 					break;
 
 
